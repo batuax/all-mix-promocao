@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+<meta charset="UTF-8">
+<title>Promoção Semanal da All Mix</title>
+
+<style>
+body{font-family:Arial;margin:0;background:#fff}
+header{background:#c40000;color:#fff;padding:20px;text-align:center}
+#slider img{width:100%;height:260px;object-fit:cover}
+.controls{text-align:center;margin:10px}
+button{padding:8px 12px;margin:5px;border:none;background:#c40000;color:#fff;border-radius:5px;cursor:pointer}
+button:hover{opacity:.9}
+section{padding:20px}
+.produtos{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px}
+.card{border:1px solid #ddd;border-radius:10px;overflow:hidden;background:#f9f9f9;position:relative}
+.card img{width:100%;height:160px;object-fit:cover}
+.card h3{margin:10px;color:#c40000}
+.card p{margin:10px}
+.card span{position:absolute;top:10px;left:10px;background:#c40000;color:#fff;padding:5px 8px;border-radius:5px;font-size:12px}
+.add{width:90%;margin:10px;background:#28a745}
+#cart{position:fixed;bottom:20px;right:20px;background:#fff;border:2px solid #c40000;border-radius:10px;padding:15px;width:260px}
+#cart h3{margin-top:0;color:#c40000}
+#cart ul{list-style:none;padding:0;max-height:120px;overflow:auto}
+.whats{width:100%;background:#25d366;margin-top:10px}
+footer{background:#c40000;color:#fff;text-align:center;padding:10px}
+</style>
+</head>
+
+<body>
+
+<header>
+<h1>🔥 Promoção Semanal da All Mix 🔥</h1>
+<p>Catálogo Interativo • PCs & Acessórios</p>
+</header>
+
+<div id="slider">
+<img id="slide" src="https://images.unsplash.com/photo-1607853202273-797f1c22a38e?auto=format&fit=crop&w=1200&q=80">
+</div>
+
+<div class="controls">
+<button onclick="filter('all')">Todos</button>
+<button onclick="filter('gamer')">PC Gamer</button>
+<button onclick="filter('office')">PC Escritório</button>
+<button onclick="filter('kit')">Kits</button>
+</div>
+
+<section>
+<div class="produtos">
+
+<div class="card gamer">
+<span>OFERTA</span>
+<img src="https://images.unsplash.com/photo-1587202372775-e229f172b9d7?auto=format&fit=crop&w=600&q=80">
+<h3>PC Gamer Ryzen 5</h3>
+<p>16GB • SSD 512GB • RTX 3060<br><strong>R$ 4.999</strong></p>
+<button class="add" onclick="add('PC Gamer Ryzen 5',4999)">Adicionar</button>
+</div>
+
+<div class="card gamer">
+<span>OFERTA</span>
+<img src="https://images.unsplash.com/photo-1593640408182-31c70c8268f5?auto=format&fit=crop&w=600&q=80">
+<h3>PC Gamer Intel i5</h3>
+<p>16GB • SSD 1TB • RTX 4060<br><strong>R$ 6.499</strong></p>
+<button class="add" onclick="add('PC Gamer Intel i5',6499)">Adicionar</button>
+</div>
+
+<div class="card office">
+<img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=600&q=80">
+<h3>PC Escritório i3</h3>
+<p>8GB • SSD 256GB<br><strong>R$ 2.199</strong></p>
+<button class="add" onclick="add('PC Escritório i3',2199)">Adicionar</button>
+</div>
+
+<div class="card kit">
+<img src="https://images.unsplash.com/photo-1587825140708-dfaf72ae4b04?auto=format&fit=crop&w=600&q=80">
+<h3>Kit PC Completo</h3>
+<p>PC + Monitor + Teclado + Mouse<br><strong>R$ 2.799</strong></p>
+<button class="add" onclick="add('Kit PC Completo',2799)">Adicionar</button>
+</div>
+
+</div>
+</section>
+
+<div id="cart">
+<h3>🛒 Seu Pedido</h3>
+<ul id="items"></ul>
+<p id="total">Total: R$ 0</p>
+<button class="whats" onclick="finish()">Finalizar no WhatsApp</button>
+</div>
+
+<footer>
+<p>© 2026 All Mix Informática • Promoção Semanal</p>
+</footer>
+
+<script>
+let slides=[
+ "https://images.unsplash.com/photo-1607853202273-797f1c22a38e?auto=format&fit=crop&w=1200&q=80",
+ "https://images.unsplash.com/photo-1593642532871-8b12e02d091c?auto=format&fit=crop&w=1200&q=80",
+ "https://images.unsplash.com/photo-1598550476439-6847785fcea6?auto=format&fit=crop&w=1200&q=80"
+];
+let index=0;
+setInterval(()=>{
+ index=(index+1)%slides.length;
+ document.getElementById("slide").src=slides[index];
+},3000);
+
+function filter(cat){
+ document.querySelectorAll('.card').forEach(c=>{
+   c.style.display=(cat==='all'||c.classList.contains(cat))?'block':'none';
+ });
+}
+
+let cart=[], total=0;
+function add(name,price){
+ cart.push({name,price});
+ total+=price;
+ render();
+}
+function render(){
+ let ul=document.getElementById('items');
+ ul.innerHTML='';
+ cart.forEach(i=>{
+   let li=document.createElement('li');
+   li.textContent=`${i.name} - R$ ${i.price}`;
+   ul.appendChild(li);
+ });
+ document.getElementById('total').textContent=`Total: R$ ${total}`;
+}
+function finish(){
+ let msg="Olá, quero aproveitar a *Promoção Semanal da All Mix*:%0A";
+ cart.forEach(i=>{msg+=`- ${i.name} (R$ ${i.price})%0A`;});
+ msg+=`%0ATotal: R$ ${total}`;
+ window.open("https://wa.me/5521974932682?text="+msg,"_blank");
+}
+</script>
+
+</body>
+</html>
