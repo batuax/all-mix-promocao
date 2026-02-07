@@ -8,9 +8,23 @@
 body{font-family:Arial;margin:0;background:#fff}
 header{background:#c40000;color:#fff;padding:20px;text-align:center}
 
-/* SLIDER VIDEO */
-#video-slider{width:100%;height:260px;overflow:hidden;background:#000}
-#video-slider video{width:100%;height:260px;object-fit:cover}
+/* ===== SLIDER VIDEO AJUSTADO ===== */
+#video-slider{
+  width:100%;
+  aspect-ratio:16/9;
+  max-height:420px;
+  overflow:hidden;
+  background:#000;
+}
+
+#video-slider video{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+}
+
+/* =============================== */
 
 .controls{text-align:center;margin:10px}
 button{padding:8px 12px;margin:5px;border:none;background:#c40000;color:#fff;border-radius:5px;cursor:pointer}
@@ -106,25 +120,23 @@ footer{background:#c40000;color:#fff;text-align:center;padding:10px}
 </footer>
 
 <script>
-// ===== SLIDER DE VÍDEOS =====
+// ===== SLIDER DE VÍDEO =====
 let videos = [
- //"https://imgur.com/E4pAjhp",
- //"https://media.geeksforgeeks.org/wp-content/uploads/20211008155009/Welcome-To-GeeksforGeeks-(3).mp4",
- "https://imgur.com/E4pAjhp.mp4"
+  "https://imgur.com/E4pAjhp.mp4"
 ];
 
 let vIndex = 0;
 let videoEl = document.getElementById("slideVideo");
 
 function playVideo(){
- videoEl.src = videos[vIndex];
- videoEl.load();
- videoEl.play();
+  videoEl.src = videos[vIndex];
+  videoEl.load();
+  videoEl.play().catch(()=>{});
 }
 
 videoEl.addEventListener("ended",()=>{
- vIndex = (vIndex + 1) % videos.length;
- playVideo();
+  vIndex = (vIndex + 1) % videos.length;
+  playVideo();
 });
 
 playVideo();
@@ -141,16 +153,13 @@ function formatBRL(v){
  return v.toLocaleString('pt-BR',{style:'currency',currency:'BRL'});
 }
 
-// ===== CARRINHO COM QUANTIDADE =====
+// ===== CARRINHO =====
 let cart=[];
 
 function add(name,price){
  let item = cart.find(i=>i.name===name);
- if(item){
-   item.qty++;
- }else{
-   cart.push({name,price,qty:1});
- }
+ if(item){ item.qty++; }
+ else{ cart.push({name,price,qty:1}); }
  render();
 }
 
@@ -170,7 +179,7 @@ function render(){
  let total=0;
 
  cart.forEach(i=>{
-   total += i.price * i.qty;
+   total += i.price*i.qty;
    let li=document.createElement('li');
    li.className='item';
    li.innerHTML=`
