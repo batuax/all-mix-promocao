@@ -31,7 +31,7 @@ footer{background:#c40000;color:#fff;text-align:center;padding:10px}
 
 <header>
 <h1>🔥 Promoção Semanal da All Mix 🔥</h1>
-<p>Catálogo  • PCs & Acessórios</p>
+<p>Catálogo • PCs & Acessórios</p>
 </header>
 
 <div id="slider">
@@ -52,7 +52,7 @@ footer{background:#c40000;color:#fff;text-align:center;padding:10px}
 <span>OFERTA</span>
 <img src="https://images.unsplash.com/photo-1587202372775-e229f172b9d7?auto=format&fit=crop&w=600&q=80">
 <h3>PC Gamer Ryzen 5</h3>
-<p>16GB • SSD 512GB • RTX 3060<br><strong>R$ 4.999</strong></p>
+<p>16GB • SSD 512GB • RTX 3060<br><strong>R$ 4.999,00</strong></p>
 <button class="add" onclick="add('PC Gamer Ryzen 5',4999)">Adicionar</button>
 </div>
 
@@ -60,21 +60,21 @@ footer{background:#c40000;color:#fff;text-align:center;padding:10px}
 <span>OFERTA</span>
 <img src="https://images.unsplash.com/photo-1593640408182-31c70c8268f5?auto=format&fit=crop&w=600&q=80">
 <h3>PC Gamer Intel i5</h3>
-<p>16GB • SSD 1TB • RTX 4060<br><strong>R$ 6.499</strong></p>
+<p>16GB • SSD 1TB • RTX 4060<br><strong>R$ 6.499,00</strong></p>
 <button class="add" onclick="add('PC Gamer Intel i5',6499)">Adicionar</button>
 </div>
 
 <div class="card office">
 <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=600&q=80">
 <h3>PC Escritório i3</h3>
-<p>8GB • SSD 256GB<br><strong>R$ 2.199</strong></p>
+<p>8GB • SSD 256GB<br><strong>R$ 2.199,00</strong></p>
 <button class="add" onclick="add('PC Escritório i3',2199)">Adicionar</button>
 </div>
 
 <div class="card kit">
 <img src="https://images.unsplash.com/photo-1587825140708-dfaf72ae4b04?auto=format&fit=crop&w=600&q=80">
 <h3>Kit PC Completo</h3>
-<p>PC + Monitor + Teclado + Mouse<br><strong>R$ 2.799</strong></p>
+<p>PC + Monitor + Teclado + Mouse<br><strong>R$ 2.799,00</strong></p>
 <button class="add" onclick="add('Kit PC Completo',2799)">Adicionar</button>
 </div>
 
@@ -84,7 +84,7 @@ footer{background:#c40000;color:#fff;text-align:center;padding:10px}
 <div id="cart">
 <h3>🛒 Seu Pedido</h3>
 <ul id="items"></ul>
-<p id="total">Total: R$ 0</p>
+<p id="total">Total: R$ 0,00</p>
 <button class="whats" onclick="finish()">Finalizar no WhatsApp</button>
 </div>
 
@@ -93,6 +93,7 @@ footer{background:#c40000;color:#fff;text-align:center;padding:10px}
 </footer>
 
 <script>
+// ===== SLIDER =====
 let slides=[
  "https://images.unsplash.com/photo-1607853202273-797f1c22a38e?auto=format&fit=crop&w=1200&q=80",
  "https://images.unsplash.com/photo-1593642532871-8b12e02d091c?auto=format&fit=crop&w=1200&q=80",
@@ -104,33 +105,49 @@ setInterval(()=>{
  document.getElementById("slide").src=slides[index];
 },3000);
 
+// ===== FILTRO =====
 function filter(cat){
  document.querySelectorAll('.card').forEach(c=>{
    c.style.display=(cat==='all'||c.classList.contains(cat))?'block':'none';
  });
 }
 
+// ===== MOEDA BR =====
+function formatBRL(valor){
+ return valor.toLocaleString('pt-BR',{
+   style:'currency',
+   currency:'BRL'
+ });
+}
+
+// ===== CARRINHO =====
 let cart=[], total=0;
+
 function add(name,price){
  cart.push({name,price});
  total+=price;
  render();
 }
+
 function render(){
  let ul=document.getElementById('items');
  ul.innerHTML='';
  cart.forEach(i=>{
    let li=document.createElement('li');
-   li.textContent=`${i.name} - R$ ${i.price}`;
+   li.textContent = `${i.name} - ${formatBRL(i.price)}`;
    ul.appendChild(li);
  });
- document.getElementById('total').textContent=`Total: R$ ${total}`;
+ document.getElementById('total').textContent = `Total: ${formatBRL(total)}`;
 }
+
+// ===== WHATSAPP =====
 function finish(){
- let msg="Olá, quero aproveitar a *Promoção Semanal da All Mix*:%0A";
- cart.forEach(i=>{msg+=`- ${i.name} (R$ ${i.price})%0A`;});
- msg+=`%0ATotal: R$ ${total}`;
- window.open("https://wa.me/5521974932682?text="+msg,"_blank");
+ let msg="Olá, quero aproveitar a *Promoção Semanal da All Mix*:\n";
+ cart.forEach(i=>{
+   msg+=`- ${i.name} (${formatBRL(i.price)})\n`;
+ });
+ msg+=`\nTotal: ${formatBRL(total)}`;
+ window.open("https://wa.me/5521974932682?text="+encodeURIComponent(msg),"_blank");
 }
 </script>
 
