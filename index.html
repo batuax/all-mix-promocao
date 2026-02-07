@@ -1,167 +1,212 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Catálogo Gamer</title>
+<title>Promoção Semanal da All Mix</title>
 
 <style>
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-family:Arial, sans-serif;
-}
+body{font-family:Arial;margin:0;background:#fff}
+header{background:#c40000;color:#fff;padding:20px;text-align:center}
 
-body{
-  background:#f2f2f2;
-  padding:20px;
-}
-
-/* ===== CATÁLOGO ===== */
-.catalogo{
-  display:grid;
-  grid-template-columns:repeat(auto-fill, minmax(220px, 1fr));
-  gap:20px;
-}
-
-.card{
-  background:#fff;
-  border-radius:10px;
-  box-shadow:0 4px 10px rgba(0,0,0,.1);
-  padding:15px;
-  display:flex;
-  flex-direction:column;
-  text-align:center;
-}
-
-/* IMAGEM SEM CORTAR */
-.card img{
+/* ===== SLIDER VIDEO AJUSTADO ===== */
+#video-slider{
   width:100%;
-  height:200px;
-  object-fit:contain;      /* 🔥 NÃO CORTA */
-  background:#f9f9f9;
-  border-radius:6px;
-  padding:10px;
+  aspect-ratio:16/9;
+  max-height:420px;
+  overflow:hidden;
+  background:#000;
 }
 
-/* INFO */
-.card h3{
-  font-size:16px;
-  margin:10px 0;
+#video-slider video{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
 }
 
-.preco{
-  color:#0a7cff;
-  font-weight:bold;
-  margin-bottom:10px;
-}
+/* =============================== */
 
-/* CONTROLE DE QUANTIDADE */
-.qtd{
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  gap:10px;
-  margin-bottom:10px;
-}
+.controls{text-align:center;margin:10px}
+button{padding:8px 12px;margin:5px;border:none;background:#c40000;color:#fff;border-radius:5px;cursor:pointer}
+button:hover{opacity:.9}
 
-.qtd button{
-  width:30px;
-  height:30px;
-  border:none;
-  background:#ddd;
-  cursor:pointer;
-  font-size:18px;
-  border-radius:5px;
-}
+section{padding:20px}
+.produtos{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px}
 
-.qtd span{
-  min-width:20px;
-  text-align:center;
-}
+.card{border:1px solid #ddd;border-radius:10px;overflow:hidden;background:#f9f9f9;position:relative}
+.card img{width:100%;height:160px;object-fit:cover}
+.card h3{margin:10px;color:#c40000}
+.card p{margin:10px}
+.card span{position:absolute;top:10px;left:10px;background:#c40000;color:#fff;padding:5px 8px;border-radius:5px;font-size:12px}
+.add{width:90%;margin:10px;background:#28a745}
 
-/* BOTÃO */
-.card button.add{
-  background:#0a7cff;
-  color:#fff;
-  border:none;
-  padding:10px;
-  border-radius:6px;
-  cursor:pointer;
-}
+#cart{position:fixed;bottom:20px;right:20px;background:#fff;border:2px solid #c40000;border-radius:10px;padding:15px;width:300px}
+#cart h3{margin-top:0;color:#c40000}
+#cart ul{list-style:none;padding:0;max-height:150px;overflow:auto}
 
-.card button.add:hover{
-  background:#055ec4;
-}
+.item{margin-bottom:10px;font-size:14px}
+.qty button{padding:2px 8px;margin:0 5px;background:#c40000}
+.qty span{font-weight:bold}
+
+.whats{width:100%;background:#25d366;margin-top:10px}
+footer{background:#c40000;color:#fff;text-align:center;padding:10px}
 </style>
 </head>
 
 <body>
 
-<h2 style="margin-bottom:20px;">🖥️ Catálogo Gamer</h2>
+<header>
+<h1>🔥 Promoção Semanal da All Mix 🔥</h1>
+<p>Catálogo • PCs & Acessórios</p>
+</header>
 
-<div class="catalogo">
-
-  <!-- PRODUTO 1 -->
-  <div class="card">
-    <img src="https://via.placeholder.com/400x300.png?text=PC+Gamer">
-    <h3>PC Gamer Ryzen 5</h3>
-    <div class="preco">R$ 4.999,00</div>
-
-    <div class="qtd">
-      <button onclick="alterarQtd(this,-1)">-</button>
-      <span>1</span>
-      <button onclick="alterarQtd(this,1)">+</button>
-    </div>
-
-    <button class="add">Adicionar ao carrinho</button>
-  </div>
-
-  <!-- PRODUTO 2 -->
-  <div class="card">
-    <img src="https://via.placeholder.com/400x500.png?text=Placa+de+Video">
-    <h3>RTX 3060 12GB</h3>
-    <div class="preco">R$ 2.299,00</div>
-
-    <div class="qtd">
-      <button onclick="alterarQtd(this,-1)">-</button>
-      <span>1</span>
-      <button onclick="alterarQtd(this,1)">+</button>
-    </div>
-
-    <button class="add">Adicionar ao carrinho</button>
-  </div>
-
-  <!-- PRODUTO 3 -->
-  <div class="card">
-    <img src="https://via.placeholder.com/300x600.png?text=Monitor">
-    <h3>Monitor Gamer 144Hz</h3>
-    <div class="preco">R$ 1.299,00</div>
-
-    <div class="qtd">
-      <button onclick="alterarQtd(this,-1)">-</button>
-      <span>1</span>
-      <button onclick="alterarQtd(this,1)">+</button>
-    </div>
-
-    <button class="add">Adicionar ao carrinho</button>
-  </div>
-
+<!-- SLIDER DE VÍDEO -->
+<div id="video-slider">
+  <video id="slideVideo" muted autoplay playsinline></video>
 </div>
 
+<div class="controls">
+<button onclick="filter('all')">Todos</button>
+<button onclick="filter('gamer')">PC Gamer</button>
+<button onclick="filter('office')">PC Escritório</button>
+<button onclick="filter('kit')">Kits</button>
+</div>
+
+<section>
+<div class="produtos">
+
+<div class="card gamer">
+<span>OFERTA</span>
+<img src="https://images.unsplash.com/photo-1587202372775-e229f172b9d7?auto=format&fit=crop&w=600&q=80">
+<h3>PC Gamer Ryzen 5</h3>
+<p>16GB • SSD 512GB • RTX 3060<br><strong>R$ 4.999,00</strong></p>
+<button class="add" onclick="add('PC Gamer Ryzen 5',4999)">Adicionar</button>
+</div>
+
+<div class="card gamer">
+<span>OFERTA</span>
+<img src="https://images.unsplash.com/photo-1593640408182-31c70c8268f5?auto=format&fit=crop&w=600&q=80">
+<h3>PC Gamer Intel i5</h3>
+<p>16GB • SSD 1TB • RTX 4060<br><strong>R$ 6.499,00</strong></p>
+<button class="add" onclick="add('PC Gamer Intel i5',6499)">Adicionar</button>
+</div>
+
+<div class="card office">
+<img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=600&q=80">
+<h3>PC Escritório i3</h3>
+<p>8GB • SSD 256GB<br><strong>R$ 2.199,00</strong></p>
+<button class="add" onclick="add('PC Escritório i3',2199)">Adicionar</button>
+</div>
+
+<div class="card kit">
+<img src="https://images.unsplash.com/photo-1587825140708-dfaf72ae4b04?auto=format&fit=crop&w=600&q=80">
+<h3>Kit PC Completo</h3>
+<p>PC + Monitor + Teclado + Mouse<br><strong>R$ 2.799,00</strong></p>
+<button class="add" onclick="add('Kit PC Completo',2799)">Adicionar</button>
+</div>
+
+</div>
+</section>
+
+<div id="cart">
+<h3>🛒 Seu Pedido</h3>
+<ul id="items"></ul>
+<p id="total">Total: R$ 0,00</p>
+<button class="whats" onclick="finish()">Finalizar no WhatsApp</button>
+</div>
+
+<footer>
+<p>© 2026 All Mix Informática • Promoção Semanal</p>
+</footer>
+
 <script>
-function alterarQtd(btn, valor){
-  const span = btn.parentElement.querySelector("span");
-  let qtd = parseInt(span.innerText);
+// ===== SLIDER DE VÍDEO =====
+let videos = [
+  "https://imgur.com/E4pAjhp.mp4"
+];
 
-  qtd += valor;
+let vIndex = 0;
+let videoEl = document.getElementById("slideVideo");
 
-  // limite exemplo: máximo 5 unidades
-  if(qtd < 1) qtd = 1;
-  if(qtd > 5) qtd = 5;
+function playVideo(){
+  videoEl.src = videos[vIndex];
+  videoEl.load();
+  videoEl.play().catch(()=>{});
+}
 
-  span.innerText = qtd;
+videoEl.addEventListener("ended",()=>{
+  vIndex = (vIndex + 1) % videos.length;
+  playVideo();
+});
+
+playVideo();
+
+// ===== FILTRO =====
+function filter(cat){
+ document.querySelectorAll('.card').forEach(c=>{
+   c.style.display=(cat==='all'||c.classList.contains(cat))?'block':'none';
+ });
+}
+
+// ===== MOEDA BR =====
+function formatBRL(v){
+ return v.toLocaleString('pt-BR',{style:'currency',currency:'BRL'});
+}
+
+// ===== CARRINHO =====
+let cart=[];
+
+function add(name,price){
+ let item = cart.find(i=>i.name===name);
+ if(item){ item.qty++; }
+ else{ cart.push({name,price,qty:1}); }
+ render();
+}
+
+function changeQty(name,delta){
+ let item = cart.find(i=>i.name===name);
+ if(!item) return;
+ item.qty += delta;
+ if(item.qty<=0){
+   cart = cart.filter(i=>i.name!==name);
+ }
+ render();
+}
+
+function render(){
+ let ul=document.getElementById('items');
+ ul.innerHTML='';
+ let total=0;
+
+ cart.forEach(i=>{
+   total += i.price*i.qty;
+   let li=document.createElement('li');
+   li.className='item';
+   li.innerHTML=`
+     ${i.name}<br>
+     ${formatBRL(i.price)} x ${i.qty} = <strong>${formatBRL(i.price*i.qty)}</strong>
+     <div class="qty">
+       <button onclick="changeQty('${i.name}',-1)">−</button>
+       <span>${i.qty}</span>
+       <button onclick="changeQty('${i.name}',1)">+</button>
+     </div>
+   `;
+   ul.appendChild(li);
+ });
+
+ document.getElementById('total').textContent=`Total: ${formatBRL(total)}`;
+}
+
+// ===== WHATSAPP =====
+function finish(){
+ let total=0;
+ let msg="Olá, quero aproveitar a *Promoção Semanal da All Mix*:\n";
+ cart.forEach(i=>{
+   total+=i.price*i.qty;
+   msg+=`- ${i.name} | ${i.qty}x (${formatBRL(i.price)}) = ${formatBRL(i.price*i.qty)}\n`;
+ });
+ msg+=`\nTotal: ${formatBRL(total)}`;
+ window.open("https://wa.me/5521974932682?text="+encodeURIComponent(msg),"_blank");
 }
 </script>
 
