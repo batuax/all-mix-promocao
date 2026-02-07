@@ -19,9 +19,15 @@ section{padding:20px}
 .card p{margin:10px}
 .card span{position:absolute;top:10px;left:10px;background:#c40000;color:#fff;padding:5px 8px;border-radius:5px;font-size:12px}
 .add{width:90%;margin:10px;background:#28a745}
-#cart{position:fixed;bottom:20px;right:20px;background:#fff;border:2px solid #c40000;border-radius:10px;padding:15px;width:260px}
+
+#cart{position:fixed;bottom:20px;right:20px;background:#fff;border:2px solid #c40000;border-radius:10px;padding:15px;width:300px}
 #cart h3{margin-top:0;color:#c40000}
-#cart ul{list-style:none;padding:0;max-height:120px;overflow:auto}
+#cart ul{list-style:none;padding:0;max-height:150px;overflow:auto}
+
+.item{margin-bottom:10px;font-size:14px}
+.qty button{padding:2px 8px;margin:0 5px;background:#c40000}
+.qty span{font-weight:bold}
+
 .whats{width:100%;background:#25d366;margin-top:10px}
 footer{background:#c40000;color:#fff;text-align:center;padding:10px}
 </style>
@@ -113,38 +119,64 @@ function filter(cat){
 }
 
 // ===== MOEDA BR =====
-function formatBRL(valor){
- return valor.toLocaleString('pt-BR',{
-   style:'currency',
-   currency:'BRL'
- });
+function formatBRL(v){
+ return v.toLocaleString('pt-BR',{style:'currency',currency:'BRL'});
 }
 
-// ===== CARRINHO =====
-let cart=[], total=0;
+// ===== CARRINHO COM QUANTIDADE =====
+let cart=[];
 
 function add(name,price){
- cart.push({name,price});
- total+=price;
+ let item = cart.find(i=>i.name===name);
+ if(item){
+   item.qty++;
+ }else{
+   cart.push({name,price,qty:1});
+ }
+ render();
+}
+
+function changeQty(name,delta){
+ let item = cart.find(i=>i.name===name);
+ if(!item) return;
+ item.qty += delta;
+ if(item.qty<=0){
+   cart = cart.filter(i=>i.name!==name);
+ }
  render();
 }
 
 function render(){
  let ul=document.getElementById('items');
  ul.innerHTML='';
+ let total=0;
+
  cart.forEach(i=>{
+   total += i.price * i.qty;
    let li=document.createElement('li');
-   li.textContent = `${i.name} - ${formatBRL(i.price)}`;
+   li.className='item';
+   li.innerHTML=`
+     ${i.name}<br>
+     ${formatBRL(i.price)} x ${i.qty} = <strong>${formatBRL(i.price*i.qty)}</strong>
+     <div class="qty">
+       <button onclick="changeQty('${i.name}',-1)">−</button>
+       <span>${i.qty}</span>
+       <button onclick="changeQty('${i.name}',1)">+</button>
+     </div>
+   `;
    ul.appendChild(li);
  });
- document.getElementById('total').textContent = `Total: ${formatBRL(total)}`;
+
+ document.getElementById('total').textContent=`Total: ${formatBRL(total)}`;
 }
 
 // ===== WHATSAPP =====
 function finish(){
+ let total=0;
  let msg="Olá, quero aproveitar a *Promoção Semanal da All Mix*:\n";
  cart.forEach(i=>{
-   msg+=`- ${i.name} (${formatBRL(i.price)})\n`;
+   total+=i.price*i.qty;
+   msg+=`- ${i.name} | ${i.qty}x (${formatBRL(i.price)}) = ${formatBRL(i.price*i.qty)}\n`;
  });
  msg+=`\nTotal: ${formatBRL(total)}`;
  window.open("https://wa.me/5521974932682?text="+encodeURIComponent(msg),"_blank");
