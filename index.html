@@ -7,12 +7,18 @@
 <style>
 body{font-family:Arial;margin:0;background:#fff}
 header{background:#c40000;color:#fff;padding:20px;text-align:center}
-#slider img{width:100%;height:260px;object-fit:cover}
+
+/* SLIDER VIDEO */
+#video-slider{width:100%;height:260px;overflow:hidden;background:#000}
+#video-slider video{width:100%;height:260px;object-fit:cover}
+
 .controls{text-align:center;margin:10px}
 button{padding:8px 12px;margin:5px;border:none;background:#c40000;color:#fff;border-radius:5px;cursor:pointer}
 button:hover{opacity:.9}
+
 section{padding:20px}
 .produtos{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px}
+
 .card{border:1px solid #ddd;border-radius:10px;overflow:hidden;background:#f9f9f9;position:relative}
 .card img{width:100%;height:160px;object-fit:cover}
 .card h3{margin:10px;color:#c40000}
@@ -40,8 +46,9 @@ footer{background:#c40000;color:#fff;text-align:center;padding:10px}
 <p>Catálogo • PCs & Acessórios</p>
 </header>
 
-<div id="slider">
-<img id="slide" src="https://imgur.com/E4pAjhp">
+<!-- SLIDER DE VÍDEO -->
+<div id="video-slider">
+  <video id="slideVideo" muted autoplay playsinline></video>
 </div>
 
 <div class="controls">
@@ -99,17 +106,28 @@ footer{background:#c40000;color:#fff;text-align:center;padding:10px}
 </footer>
 
 <script>
-// ===== SLIDER =====
-let slides=[
- "https://images.unsplash.com/photo-1607853202273-797f1c22a38e?auto=format&fit=crop&w=1200&q=80",
- "https://images.unsplash.com/photo-1593642532871-8b12e02d091c?auto=format&fit=crop&w=1200&q=80",
- "https://images.unsplash.com/photo-1598550476439-6847785fcea6?auto=format&fit=crop&w=1200&q=80"
+// ===== SLIDER DE VÍDEOS =====
+let videos = [
+ "https://www.w3schools.com/html/mov_bbb.mp4",
+ "https://media.geeksforgeeks.org/wp-content/uploads/20211008155009/Welcome-To-GeeksforGeeks-(3).mp4",
+ "https://www.w3schools.com/html/movie.mp4"
 ];
-let index=0;
-setInterval(()=>{
- index=(index+1)%slides.length;
- document.getElementById("slide").src=slides[index];
-},3000);
+
+let vIndex = 0;
+let videoEl = document.getElementById("slideVideo");
+
+function playVideo(){
+ videoEl.src = videos[vIndex];
+ videoEl.load();
+ videoEl.play();
+}
+
+videoEl.addEventListener("ended",()=>{
+ vIndex = (vIndex + 1) % videos.length;
+ playVideo();
+});
+
+playVideo();
 
 // ===== FILTRO =====
 function filter(cat){
