@@ -8,7 +8,6 @@
 body{font-family:Arial;margin:0;background:#fff}
 header{background:#c40000;color:#fff;padding:20px;text-align:center}
 
-/* ===== SLIDER VIDEO AJUSTADO ===== */
 #video-slider{
   width:100%;
   aspect-ratio:16/9;
@@ -16,15 +15,12 @@ header{background:#c40000;color:#fff;padding:20px;text-align:center}
   overflow:hidden;
   background:#000;
 }
-
 #video-slider video{
   width:100%;
   height:100%;
   object-fit:cover;
   display:block;
 }
-
-/* =============================== */
 
 .controls{text-align:center;margin:10px}
 button{padding:8px 12px;margin:5px;border:none;background:#c40000;color:#fff;border-radius:5px;cursor:pointer}
@@ -34,7 +30,7 @@ section{padding:20px}
 .produtos{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:20px}
 
 .card{border:1px solid #ddd;border-radius:10px;overflow:hidden;background:#f9f9f9;position:relative}
-.card img{width:100%;height:200px;object-fit:cover}
+.card img{width:100%;height:200px;object-fit:contain;background:#fff}
 .card h3{margin:10px;color:#c40000}
 .card p{margin:10px}
 .card span{position:absolute;top:10px;left:10px;background:#c40000;color:#fff;padding:5px 8px;border-radius:5px;font-size:12px}
@@ -43,7 +39,6 @@ section{padding:20px}
 #cart{position:fixed;bottom:20px;right:20px;background:#fff;border:2px solid #c40000;border-radius:10px;padding:15px;width:300px}
 #cart h3{margin-top:0;color:#c40000}
 #cart ul{list-style:none;padding:0;max-height:150px;overflow:auto}
-
 .item{margin-bottom:10px;font-size:14px}
 .qty button{padding:2px 8px;margin:0 5px;background:#c40000}
 .qty span{font-weight:bold}
@@ -57,10 +52,9 @@ footer{background:#c40000;color:#fff;text-align:center;padding:10px}
 
 <header>
 <h1>🔥 Promoção Semanal da All Mix 🔥</h1>
-<p>Catálogo • PCs & Acessórios</p>
+<p>Catálogo • PCs • Monitores • Nobreaks</p>
 </header>
 
-<!-- SLIDER DE VÍDEO -->
 <div id="video-slider">
   <video id="slideVideo" muted autoplay playsinline></video>
 </div>
@@ -70,14 +64,17 @@ footer{background:#c40000;color:#fff;text-align:center;padding:10px}
 <button onclick="filter('gamer')">PC Gamer</button>
 <button onclick="filter('office')">PC Escritório</button>
 <button onclick="filter('kit')">Kits</button>
+<button onclick="filter('monitor')">Monitores</button>
+<button onclick="filter('nobreak')">Nobreak</button>
 </div>
 
 <section>
 <div class="produtos">
 
+<!-- PCs -->
 <div class="card gamer">
 <span>OFERTA</span>
-<img src="https://images.unsplash.com/photo-1587202372775-e229f172b9d7?auto=format&fit=crop&w=600&q=80">
+<img src="https://images.unsplash.com/photo-1587202372775-e229f172b9d7">
 <h3>PC Gamer Ryzen 5</h3>
 <p>16GB • SSD 512GB • RTX 3060<br><strong>R$ 4.999,00</strong></p>
 <button class="add" onclick="add('PC Gamer Ryzen 5',4999)">Adicionar</button>
@@ -85,24 +82,84 @@ footer{background:#c40000;color:#fff;text-align:center;padding:10px}
 
 <div class="card gamer">
 <span>OFERTA</span>
-<img src="https://images.unsplash.com/photo-1593640408182-31c70c8268f5?auto=format&fit=crop&w=600&q=80">
+<img src="https://images.unsplash.com/photo-1593640408182-31c70c8268f5">
 <h3>PC Gamer Intel i5</h3>
 <p>16GB • SSD 1TB • RTX 4060<br><strong>R$ 6.499,00</strong></p>
 <button class="add" onclick="add('PC Gamer Intel i5',6499)">Adicionar</button>
 </div>
 
 <div class="card office">
-<img src="https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=600&q=80">
+<img src="https://images.unsplash.com/photo-1518770660439-4636190af475">
 <h3>PC Escritório i3</h3>
 <p>8GB • SSD 256GB<br><strong>R$ 2.199,00</strong></p>
 <button class="add" onclick="add('PC Escritório i3',2199)">Adicionar</button>
 </div>
 
 <div class="card kit">
-<img src="https://images.unsplash.com/photo-1587825140708-dfaf72ae4b04?auto=format&fit=crop&w=600&q=80">
+<img src="https://images.unsplash.com/photo-1587825140708-dfaf72ae4b04">
 <h3>Kit PC Completo</h3>
 <p>PC + Monitor + Teclado + Mouse<br><strong>R$ 2.799,00</strong></p>
 <button class="add" onclick="add('Kit PC Completo',2799)">Adicionar</button>
+</div>
+
+<!-- MONITORES HAYOM -->
+<div class="card monitor">
+<img src="https://http2.mlstatic.com/D_NQ_NP_2X_934768-MLB69535614540_052023-F.webp">
+<h3>Monitor Hayom 19"</h3>
+<p>HD • HDMI/VGA<br><strong>R$ 399,00</strong></p>
+<button class="add" onclick="add('Monitor Hayom 19',399)">Adicionar</button>
+</div>
+
+<div class="card monitor">
+<img src="https://http2.mlstatic.com/D_NQ_NP_2X_703006-MLB70306356345_062023-F.webp">
+<h3>Monitor Hayom 21.5"</h3>
+<p>Full HD • HDMI<br><strong>R$ 549,00</strong></p>
+<button class="add" onclick="add('Monitor Hayom 21.5',549)">Adicionar</button>
+</div>
+
+<!-- MONITORES BRAZIL PC -->
+<div class="card monitor">
+<img src="https://http2.mlstatic.com/D_NQ_NP_2X_737337-MLB69537013536_052023-F.webp">
+<h3>Monitor Brazil PC 19"</h3>
+<p>HD • HDMI/VGA<br><strong>R$ 379,00</strong></p>
+<button class="add" onclick="add('Monitor Brazil PC 19',379)">Adicionar</button>
+</div>
+
+<div class="card monitor">
+<img src="https://http2.mlstatic.com/D_NQ_NP_2X_913987-MLB73427209949_122023-F.webp">
+<h3>Monitor Brazil PC 21.5"</h3>
+<p>Full HD • HDMI<br><strong>R$ 529,00</strong></p>
+<button class="add" onclick="add('Monitor Brazil PC 21.5',529)">Adicionar</button>
+</div>
+
+<!-- MONITOR DUEX -->
+<div class="card monitor">
+<img src="https://http2.mlstatic.com/D_NQ_NP_2X_640353-MLB70634689871_072023-F.webp">
+<h3>Monitor Duex 23.8"</h3>
+<p>Full HD • HDMI<br><strong>R$ 649,00</strong></p>
+<button class="add" onclick="add('Monitor Duex 23.8',649)">Adicionar</button>
+</div>
+
+<!-- NOBREAKS INTELBRAS -->
+<div class="card nobreak">
+<img src="http://backend.intelbras.com/sites/default/files/2021-06/nobreak_attiv_600_perp_esq.png">
+<h3>Nobreak Intelbras 600VA</h3>
+<p>Bivolt<br><strong>R$ 449,00</strong></p>
+<button class="add" onclick="add('Nobreak Intelbras 600VA',449)">Adicionar</button>
+</div>
+
+<div class="card nobreak">
+<img src="http://backend.intelbras.com/sites/default/files/2021-06/nobreak_attiv_600_perp_esq.png">
+<h3>Nobreak Intelbras 1200VA</h3>
+<p>Bivolt<br><strong>R$ 799,00</strong></p>
+<button class="add" onclick="add('Nobreak Intelbras 1200VA',799)">Adicionar</button>
+</div>
+
+<div class="card nobreak">
+<img src="http://backend.intelbras.com/sites/default/files/2021-06/nobreak_attiv_600_perp_esq.png">
+<h3>Nobreak Intelbras 1500VA</h3>
+<p>Bivolt<br><strong>R$ 1.099,00</strong></p>
+<button class="add" onclick="add('Nobreak Intelbras 1500VA',1099)">Adicionar</button>
 </div>
 
 </div>
@@ -120,90 +177,54 @@ footer{background:#c40000;color:#fff;text-align:center;padding:10px}
 </footer>
 
 <script>
-// ===== SLIDER DE VÍDEO =====
-let videos = [
-  "https://imgur.com/E4pAjhp.mp4"
-];
-
-let vIndex = 0;
-let videoEl = document.getElementById("slideVideo");
-
-function playVideo(){
-  videoEl.src = videos[vIndex];
-  videoEl.load();
-  videoEl.play().catch(()=>{});
-}
-
-videoEl.addEventListener("ended",()=>{
-  vIndex = (vIndex + 1) % videos.length;
-  playVideo();
-});
-
+let videos=["https://imgur.com/E4pAjhp.mp4"];
+let vIndex=0;
+let videoEl=document.getElementById("slideVideo");
+function playVideo(){videoEl.src=videos[vIndex];videoEl.load();videoEl.play().catch(()=>{});}
+videoEl.addEventListener("ended",()=>{vIndex=(vIndex+1)%videos.length;playVideo();});
 playVideo();
 
-// ===== FILTRO =====
 function filter(cat){
  document.querySelectorAll('.card').forEach(c=>{
-   c.style.display=(cat==='all'||c.classList.contains(cat))?'block':'none';
+  c.style.display=(cat==='all'||c.classList.contains(cat))?'block':'none';
  });
 }
-
-// ===== MOEDA BR =====
-function formatBRL(v){
- return v.toLocaleString('pt-BR',{style:'currency',currency:'BRL'});
-}
-
-// ===== CARRINHO =====
+function formatBRL(v){return v.toLocaleString('pt-BR',{style:'currency',currency:'BRL'});}
 let cart=[];
-
 function add(name,price){
- let item = cart.find(i=>i.name===name);
- if(item){ item.qty++; }
- else{ cart.push({name,price,qty:1}); }
+ let i=cart.find(x=>x.name===name);
+ i?i.qty++:cart.push({name,price,qty:1});
  render();
 }
-
-function changeQty(name,delta){
- let item = cart.find(i=>i.name===name);
- if(!item) return;
- item.qty += delta;
- if(item.qty<=0){
-   cart = cart.filter(i=>i.name!==name);
- }
+function changeQty(n,d){
+ let i=cart.find(x=>x.name===n);
+ if(!i)return;
+ i.qty+=d;
+ if(i.qty<=0)cart=cart.filter(x=>x.name!==n);
  render();
 }
-
 function render(){
- let ul=document.getElementById('items');
- ul.innerHTML='';
- let total=0;
-
+ let ul=document.getElementById('items');ul.innerHTML='';let total=0;
  cart.forEach(i=>{
-   total += i.price*i.qty;
-   let li=document.createElement('li');
-   li.className='item';
-   li.innerHTML=`
-     ${i.name}<br>
-     ${formatBRL(i.price)} x ${i.qty} = <strong>${formatBRL(i.price*i.qty)}</strong>
-     <div class="qty">
-       <button onclick="changeQty('${i.name}',-1)">−</button>
-       <span>${i.qty}</span>
-       <button onclick="changeQty('${i.name}',1)">+</button>
-     </div>
-   `;
-   ul.appendChild(li);
+  total+=i.price*i.qty;
+  ul.innerHTML+=`
+   <li class="item">
+   ${i.name}<br>
+   ${formatBRL(i.price)} x ${i.qty} = <strong>${formatBRL(i.price*i.qty)}</strong>
+   <div class="qty">
+    <button onclick="changeQty('${i.name}',-1)">−</button>
+    <span>${i.qty}</span>
+    <button onclick="changeQty('${i.name}',1)">+</button>
+   </div>
+   </li>`;
  });
-
  document.getElementById('total').textContent=`Total: ${formatBRL(total)}`;
 }
-
-// ===== WHATSAPP =====
 function finish(){
- let total=0;
- let msg="Olá, quero aproveitar a *Promoção Semanal da All Mix*:\n";
+ let total=0,msg="Olá, quero aproveitar a *Promoção Semanal da All Mix*:\n";
  cart.forEach(i=>{
-   total+=i.price*i.qty;
-   msg+=`- ${i.name} | ${i.qty}x (${formatBRL(i.price)}) = ${formatBRL(i.price*i.qty)}\n`;
+  total+=i.price*i.qty;
+  msg+=`- ${i.name} | ${i.qty}x = ${formatBRL(i.price*i.qty)}\n`;
  });
  msg+=`\nTotal: ${formatBRL(total)}`;
  window.open("https://wa.me/5521974932682?text="+encodeURIComponent(msg),"_blank");
