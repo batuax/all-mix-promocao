@@ -26,6 +26,7 @@ export function verifySessionValue(sessionValue?: string) {
   const signature = parts.pop()!;
   const payload = parts.join(".");
   const expected = sign(payload);
+
   try {
     return timingSafeEqual(Buffer.from(signature), Buffer.from(expected));
   } catch {
